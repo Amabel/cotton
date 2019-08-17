@@ -1,12 +1,12 @@
 {
-  "name": "web-extension-template",
+  "name": "cotton",
   "version": "0.0.1",
   "description": "",
   "scripts": {
     "dev": "webextension-toolbox dev --devtool=inline-cheap-source-map",
     "build": "webextension-toolbox build",
     "lint": "eslint ./app/scripts/*.js",
-    "zip": "rm -f ./web-extension-template.zip && cd ./dist/chrome && zip -r web-extension-template.zip * && mv web-extension-template.zip ../../web-extension-template.zip"
+    "zip": "rm -f ./cotton.zip && cd ./dist/chrome && zip -r cotton.zip * && mv cotton.zip ../../cotton.zip"
   },
   "husky": {
     "hooks": {

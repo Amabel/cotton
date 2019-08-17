@@ -1,6 +1,6 @@
-# Web Extension Template
+# Cotton
 
-A quick start for developing web extensions (Chrome, Firefox, Edge).
+Make your GitHub contribution colorful.
 
 ## Install
 
