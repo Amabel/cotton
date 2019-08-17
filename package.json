@@ -30,5 +30,8 @@
     "lint-staged": "^9.2.1",
     "prettier": "^1.18.2",
     "webextension-toolbox": "latest"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
   }
 }
