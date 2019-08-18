@@ -8,6 +8,8 @@ main()
 function main() {
   const colors = getColorConfig()
   applyColors(colors)
+
+  observeMutation(colors)
 }
 
 function getColorConfig() {
@@ -79,4 +81,23 @@ function fillColorsInActivityOverview(colors) {
   container.find('.activity-overview-point').each(function() {
     $(this).css('stroke', colors[3])
   })
+}
+
+function getContributionsContainer() {
+  return $('.js-yearly-contributions')
+}
+
+function observeMutation(colors) {
+  const mainContainer = $('#js-pjax-container')
+
+  if (mainContainer.length) {
+    const observer = new MutationObserver(function() {
+      const contributionsContainer = getContributionsContainer()
+      if (contributionsContainer.length) {
+        applyColors(colors)
+      }
+    })
+
+    observer.observe(mainContainer[0], { subtree: true, childList: true })
+  }
 }
