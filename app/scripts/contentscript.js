@@ -28,6 +28,7 @@ function getColorConfig() {
 function applyColors(colors) {
   fillColorsInCalendar(colors)
   fillColorsInLegend(colors)
+  fillColorsInActivityOverview(colors)
 }
 
 function getCalendarContainer() {
@@ -58,4 +59,24 @@ function fillColorsInLegend(colors) {
       const newColor = colors[defaultColors.indexOf(color)]
       $(this).css('background-color', newColor)
     })
+}
+
+function getActivityOverviewContainer() {
+  return $('.js-activity-overview-graph-container')
+}
+
+function fillColorsInActivityOverview(colors) {
+  const container = getActivityOverviewContainer()
+  container.find('.js-highlight-blob').each(function() {
+    $(this).attr('fill', colors[2])
+    $(this).css('stroke', colors[2])
+  })
+
+  container.find('.activity-overview-axis ').each(function() {
+    $(this).css('stroke', colors[3])
+  })
+
+  container.find('.activity-overview-point').each(function() {
+    $(this).css('stroke', colors[3])
+  })
 }
