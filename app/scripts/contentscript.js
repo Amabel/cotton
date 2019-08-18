@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import * as openColor from 'open-color/open-color.json'
 import { defaultColors } from './default-colors'
+import { rgb2hex } from './utils'
 
 main()
 
@@ -26,6 +27,7 @@ function getColorConfig() {
 
 function applyColors(colors) {
   fillColorInCalendar(colors)
+  fillColorInLegend(colors)
 }
 
 function getCalendarContainer() {
@@ -42,4 +44,18 @@ function fillColorInCalendar(colors) {
     const newFill = colors[defaultColors.indexOf(fill)]
     $(this).attr('fill', newFill)
   })
+}
+
+function getLegendContainer() {
+  return $('.contrib-legend')
+}
+
+function fillColorInLegend(colors) {
+  getLegendContainer()
+    .find('li')
+    .each(function() {
+      const color = rgb2hex($(this).css('background-color'))
+      const newColor = colors[defaultColors.indexOf(color)]
+      $(this).css('background-color', newColor)
+    })
 }
