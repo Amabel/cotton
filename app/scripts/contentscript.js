@@ -26,8 +26,8 @@ function getColorConfig() {
 }
 
 function applyColors(colors) {
-  fillColorInCalendar(colors)
-  fillColorInLegend(colors)
+  fillColorsInCalendar(colors)
+  fillColorsInLegend(colors)
 }
 
 function getCalendarContainer() {
@@ -38,7 +38,7 @@ function getDayRects() {
   return getCalendarContainer().find('rect.day')
 }
 
-function fillColorInCalendar(colors) {
+function fillColorsInCalendar(colors) {
   getDayRects().each(function() {
     const fill = $(this).attr('fill')
     const newFill = colors[defaultColors.indexOf(fill)]
@@ -50,7 +50,7 @@ function getLegendContainer() {
   return $('.contrib-legend')
 }
 
-function fillColorInLegend(colors) {
+function fillColorsInLegend(colors) {
   getLegendContainer()
     .find('li')
     .each(function() {
