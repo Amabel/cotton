@@ -28,9 +28,9 @@
   "browser_action":
 	{
     "default_title": "Cotton",
-		"default_popup": "popup.html"
+    "default_popup": "popup.html"
 	},
   "permissions": [],
   "web_accessible_resources": [],
-  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://code.jquery.com https://cdn.jsdelivr.net; object-src 'self' "
 }
