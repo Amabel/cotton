@@ -2,6 +2,7 @@ import $ from 'jquery'
 import * as openColor from 'open-color/open-color.json'
 import { defaultColors } from './default-colors'
 import { rgb2hex } from './utils'
+import { COLORS_INDEX } from './constants'
 
 main()
 
@@ -15,7 +16,7 @@ function main() {
 function getColorConfig() {
   // Index range: 0 ~ 9
   // See more on https://yeun.github.io/open-color/
-  const colorsIndex = [0, 2, 5, 7, 9]
+  const colorsIndex = COLORS_INDEX
   const colors = openColor.blue
   // Trim colors based on index
   return [

@@ -1,6 +1,28 @@
 @import 'open-color.css';
 
 /* layout */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row.center {
+  align-items: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-col.center {
+  justify-content: center;
+}
+
+.ml-8 {
+  margin-left: 8px !important;
+}
+
 .pl-12 {
   padding-left: 12px;
 }

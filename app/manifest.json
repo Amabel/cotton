@@ -33,7 +33,9 @@
     "default_title": "Cotton",
     "default_popup": "popup.html"
 	},
-  "permissions": [],
+  "permissions": [
+    "storage"
+  ],
   "web_accessible_resources": [],
   "content_security_policy": "script-src 'self' https://www.google-analytics.com https://code.jquery.com https://cdn.jsdelivr.net; object-src 'self' "
 }
