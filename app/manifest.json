@@ -4,7 +4,10 @@
   "version": "0.2.0",
   "manifest_version": 2,
   "default_locale": "en",
-  "icons": {},
+  "icons": {
+    "16": "assets/images/logo-16.png",
+    "128": "assets/images/logo-128.png"
+  },
   "background": {
     "scripts": [
       "scripts/background.js"
