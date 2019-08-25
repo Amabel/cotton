@@ -11,3 +11,9 @@
 .container .header .logo {
   height: 24px;
 }
+
+.container .footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

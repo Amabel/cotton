@@ -1,11 +1,22 @@
+@import 'open-color.css';
+
 /* layout */
 .pl-12 {
   padding-left: 12px;
 }
 
+/* color */
+.color-gray-6 {
+  color: var(--oc-gray-6);
+}
+
 /* font */
 .bold {
   font-weight: bold;
+}
+
+.fs-12 {
+  font-size: 12px;
 }
 
 .fs-24 {
