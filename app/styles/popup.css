@@ -1,0 +1,13 @@
+.container {
+  padding: 24px;
+}
+
+.container .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .header .logo {
+  height: 24px;
+}
