@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import * as openColor from 'open-color/open-color.json'
-import { defaultColors } from './default-colors'
+import { defaultTheme } from './default-colors'
 import { rgb2hex } from './utils'
 import { COLORS_INDEX } from './constants'
 
@@ -19,7 +19,7 @@ function addMessageListener() {
   })
 }
 
-function getColorConfig(theme) {
+function getThemeColors(theme) {
   // Index range: 0 ~ 9
   // See more on https://yeun.github.io/open-color/
   const colorsIndex = COLORS_INDEX
@@ -42,17 +42,17 @@ function getColorConfig(theme) {
  */
 function updateTheme(options = {}) {
   chrome.storage.sync.get(['theme', 'previousTheme'], function(result) {
-    const theme = result ? getColorConfig(result.theme) : defaultColors
-    let previousTheme = result ? getColorConfig(result.previousTheme) : defaultColors
-    previousTheme = options.default ? defaultColors : previousTheme
-    applyColors(theme, previousTheme)
+    const theme = result ? getThemeColors(result.theme) : defaultTheme
+    let previousTheme = result ? getThemeColors(result.previousTheme) : defaultTheme
+    previousTheme = options.default ? defaultTheme : previousTheme
+    applyTheme(theme, previousTheme)
   })
 }
 
-function applyColors(colors, previousTheme) {
-  fillColorsInCalendar(colors, previousTheme)
-  fillColorsInLegend(colors, previousTheme)
-  fillColorsInActivityOverview(colors)
+function applyTheme(theme, previousTheme) {
+  fillColorsInCalendar(theme, previousTheme)
+  fillColorsInLegend(theme, previousTheme)
+  fillColorsInActivityOverview(theme)
 }
 
 function getCalendarContainer() {
