@@ -116,7 +116,7 @@ function observeMutation() {
     const observer = new MutationObserver(function() {
       const contributionsContainer = getContributionsContainer()
       if (contributionsContainer.length) {
-        updateTheme()
+        updateTheme({ default: true })
       }
     })
 
