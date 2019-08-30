@@ -7,17 +7,23 @@ import { COLORS_INDEX } from './constants'
 main()
 
 function main() {
-  const colors = getColorConfig()
-  applyColors(colors)
+  updateTheme({ default: true })
 
-  observeMutation(colors)
+  addMessageListener()
+  observeMutation()
 }
 
-function getColorConfig() {
+function addMessageListener() {
+  chrome.runtime.onMessage.addListener(() => {
+    updateTheme()
+  })
+}
+
+function getColorConfig(theme) {
   // Index range: 0 ~ 9
   // See more on https://yeun.github.io/open-color/
   const colorsIndex = COLORS_INDEX
-  const colors = openColor.blue
+  const colors = openColor.default[theme]
   // Trim colors based on index
   return [
     colors[colorsIndex[0]],
@@ -28,9 +34,24 @@ function getColorConfig() {
   ]
 }
 
-function applyColors(colors) {
-  fillColorsInCalendar(colors)
-  fillColorsInLegend(colors)
+/**
+ *
+ * @param {*} options
+ *            default:    true: update theme based on default theme
+ *                        false: update theme based on previous theme
+ */
+function updateTheme(options = {}) {
+  chrome.storage.sync.get(['theme', 'previousTheme'], function(result) {
+    const theme = result ? getColorConfig(result.theme) : defaultColors
+    let previousTheme = result ? getColorConfig(result.previousTheme) : defaultColors
+    previousTheme = options.default ? defaultColors : previousTheme
+    applyColors(theme, previousTheme)
+  })
+}
+
+function applyColors(colors, previousTheme) {
+  fillColorsInCalendar(colors, previousTheme)
+  fillColorsInLegend(colors, previousTheme)
   fillColorsInActivityOverview(colors)
 }
 
@@ -42,10 +63,10 @@ function getDayRects() {
   return getCalendarContainer().find('rect.day')
 }
 
-function fillColorsInCalendar(colors) {
+function fillColorsInCalendar(colors, previousTheme) {
   getDayRects().each(function() {
     const fill = $(this).attr('fill')
-    const newFill = colors[defaultColors.indexOf(fill)]
+    const newFill = colors[previousTheme.indexOf(fill)]
     $(this).attr('fill', newFill)
   })
 }
@@ -54,12 +75,12 @@ function getLegendContainer() {
   return $('.contrib-legend')
 }
 
-function fillColorsInLegend(colors) {
+function fillColorsInLegend(colors, previousTheme) {
   getLegendContainer()
     .find('li')
     .each(function() {
       const color = rgb2hex($(this).css('background-color'))
-      const newColor = colors[defaultColors.indexOf(color)]
+      const newColor = colors[previousTheme.indexOf(color)]
       $(this).css('background-color', newColor)
     })
 }
@@ -88,14 +109,14 @@ function getContributionsContainer() {
   return $('.js-yearly-contributions')
 }
 
-function observeMutation(colors) {
+function observeMutation() {
   const mainContainer = $('#js-pjax-container')
 
   if (mainContainer.length) {
     const observer = new MutationObserver(function() {
       const contributionsContainer = getContributionsContainer()
       if (contributionsContainer.length) {
-        applyColors(colors)
+        updateTheme()
       }
     })
 

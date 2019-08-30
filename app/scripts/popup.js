@@ -1,7 +1,6 @@
 import $ from 'jquery'
 import * as app from '../manifest.json'
 import * as openColor from 'open-color/open-color.json'
-// import { defaultColors } from './default-colors'
 import { COLORS_INDEX } from './constants'
 import { capitalizeFirstLetter } from './utils'
 
@@ -28,7 +27,7 @@ function addRandomizeActionListener() {
 
 function randomizeTheme() {
   chrome.storage.sync.get('theme', function(result) {
-    const currentTheme = result.colors
+    const currentTheme = result.theme
     let theme = null
 
     // Prevent the same theme
@@ -46,8 +45,6 @@ function getRandomTheme() {
 }
 
 function addThemeDiv() {
-  // TODO: clear existing div
-
   const cb = function(div, themeName) {
     $('#currentTheme').html(div)
     $('#themeName').html(capitalizeFirstLetter(themeName))
@@ -79,9 +76,15 @@ function formThemeDiv(callback) {
 }
 
 function setTheme(theme) {
-  chrome.storage.sync.set({ theme: theme }, function() {
-    // TODO: send msg to background page and update theme
-    addThemeDiv()
+  chrome.storage.sync.get('theme', function(result) {
+    const previousTheme = result.theme ? result.theme : 'defaultTheme'
+    chrome.storage.sync.set({ theme, previousTheme }, function() {
+      chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, { from: 'cotton', type: 'updateTheme', theme })
+      })
+
+      addThemeDiv()
+    })
   })
 }
 
