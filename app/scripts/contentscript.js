@@ -1,8 +1,7 @@
 import $ from 'jquery'
 import * as openColor from 'open-color/open-color.json'
-import { defaultTheme } from './default-colors'
 import { rgb2hex } from './utils'
-import { COLORS_INDEX } from './constants'
+import { COLORS_INDEX, DEFAULT_THEME } from './constants'
 
 main()
 
@@ -35,7 +34,7 @@ function getThemeColors(theme) {
     ]
   }
 
-  return defaultTheme
+  return DEFAULT_THEME
 }
 
 /**
@@ -46,9 +45,9 @@ function getThemeColors(theme) {
  */
 function updateTheme(options = {}) {
   chrome.storage.sync.get(['theme', 'previousTheme'], function(result) {
-    const theme = result ? getThemeColors(result.theme) : defaultTheme
-    let previousTheme = result ? getThemeColors(result.previousTheme) : defaultTheme
-    previousTheme = options.default ? defaultTheme : previousTheme
+    const theme = result ? getThemeColors(result.theme) : DEFAULT_THEME
+    let previousTheme = result ? getThemeColors(result.previousTheme) : DEFAULT_THEME
+    previousTheme = options.default ? DEFAULT_THEME : previousTheme
     applyTheme(theme, previousTheme)
   })
 }

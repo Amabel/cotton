@@ -1,9 +1,8 @@
 import $ from 'jquery'
 import * as app from '../manifest.json'
 import * as openColor from 'open-color/open-color.json'
-import { COLORS_INDEX } from './constants'
+import { COLORS_INDEX, DEFAULT_THEME } from './constants'
 import { capitalizeFirstLetter } from './utils'
-import { defaultTheme } from './default-colors'
 
 setup()
 addVersionNumber()
@@ -80,7 +79,7 @@ function formThemeDiv(callback) {
         colors[colorsIndex[4]],
       ]
     } else {
-      trimedColors = defaultTheme
+      trimedColors = DEFAULT_THEME
     }
 
     let div = ''
@@ -94,7 +93,7 @@ function formThemeDiv(callback) {
 
 function setTheme(theme) {
   chrome.storage.sync.get('theme', function(result) {
-    const previousTheme = result.theme ? result.theme : 'defaultTheme'
+    const previousTheme = result.theme ? result.theme : 'DEFAULT_THEME'
     chrome.storage.sync.set({ theme, previousTheme }, function() {
       chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, { from: 'cotton', type: 'updateTheme', theme })
