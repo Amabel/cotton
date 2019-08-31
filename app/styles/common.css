@@ -27,6 +27,11 @@
   padding-left: 12px;
 }
 
+/* size */
+.w-220 {
+  width: 220px;
+}
+
 /* color */
 .color-gray-6 {
   color: var(--oc-gray-6);

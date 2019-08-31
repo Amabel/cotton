@@ -20,8 +20,8 @@
   display: flex;
 }
 
-.container .body .theme .button img {
-  width: 16px;
+.container .body .theme .button {
+  padding: 8px 10px;
 }
 
 .container .body .current-theme .square {

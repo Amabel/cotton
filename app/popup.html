@@ -19,14 +19,19 @@
 
     <div class="body">
       <div class="theme flex-row center">
-        <div class="flex-row center">
+        <div class="flex-row center w-220">
           <span>Current theme: </span>
           <span id="themeName" class="ml-8"></span>
           <span id="currentTheme" class="current-theme ml-8"></span>
         </div>
-        <button id="random" class="mini ui basic icon button ml-8">
-          <img src="assets/images/change.svg" alt="randomize">
-        </button>
+        <div class="ui mini basic buttons">
+          <button id="random" class="ui button" title="Randomize">
+            <i class="icon"><img src="assets/images/dice.svg" alt="randomize"></i>
+          </button>
+          <button id="reset" class="ui button" title="Reset">
+            <i class="icon"><img src="assets/images/change.svg" alt="reset"></i>
+          </button>
+        </div>
       </div>
     </div>
     <div class="ui divider"></div>
