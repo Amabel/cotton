@@ -24,14 +24,18 @@ function getThemeColors(theme) {
   // See more on https://yeun.github.io/open-color/
   const colorsIndex = COLORS_INDEX
   const colors = openColor.default[theme]
-  // Trim colors based on index
-  return [
-    colors[colorsIndex[0]],
-    colors[colorsIndex[1]],
-    colors[colorsIndex[2]],
-    colors[colorsIndex[3]],
-    colors[colorsIndex[4]],
-  ]
+  if (colors) {
+    // Trim colors based on index
+    return [
+      colors[colorsIndex[0]],
+      colors[colorsIndex[1]],
+      colors[colorsIndex[2]],
+      colors[colorsIndex[3]],
+      colors[colorsIndex[4]],
+    ]
+  }
+
+  return defaultTheme
 }
 
 /**

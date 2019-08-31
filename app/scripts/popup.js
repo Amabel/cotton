@@ -3,6 +3,7 @@ import * as app from '../manifest.json'
 import * as openColor from 'open-color/open-color.json'
 import { COLORS_INDEX } from './constants'
 import { capitalizeFirstLetter } from './utils'
+import { defaultTheme } from './default-colors'
 
 setup()
 addVersionNumber()
@@ -17,12 +18,23 @@ function setup() {
 
 function addActionListeners() {
   addRandomizeActionListener()
+  addResetActionListener()
+}
+
+function addResetActionListener() {
+  $('#reset').click(function() {
+    resetTheme()
+  })
 }
 
 function addRandomizeActionListener() {
   $('#random').click(function() {
     randomizeTheme()
   })
+}
+
+function resetTheme() {
+  setTheme('default')
 }
 
 function randomizeTheme() {
@@ -57,14 +69,19 @@ function formThemeDiv(callback) {
     const theme = result.theme
     const colorsIndex = COLORS_INDEX
     const colors = openColor.default[theme]
+    let trimedColors
 
-    const trimedColors = [
-      colors[colorsIndex[0]],
-      colors[colorsIndex[1]],
-      colors[colorsIndex[2]],
-      colors[colorsIndex[3]],
-      colors[colorsIndex[4]],
-    ]
+    if (colors) {
+      trimedColors = [
+        colors[colorsIndex[0]],
+        colors[colorsIndex[1]],
+        colors[colorsIndex[2]],
+        colors[colorsIndex[3]],
+        colors[colorsIndex[4]],
+      ]
+    } else {
+      trimedColors = defaultTheme
+    }
 
     let div = ''
     trimedColors.forEach(function(c) {
@@ -82,7 +99,6 @@ function setTheme(theme) {
       chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, { from: 'cotton', type: 'updateTheme', theme })
       })
-
       addThemeDiv()
     })
   })
