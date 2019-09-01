@@ -78,14 +78,11 @@ function formThemeDiv(callback) {
 }
 
 function setTheme(theme) {
-  chrome.storage.sync.get('theme', function(result) {
-    const previousTheme = result.theme ? result.theme : 'DEFAULT_THEME'
-    chrome.storage.sync.set({ theme, previousTheme }, function() {
-      chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, { from: 'cotton', type: 'updateTheme', theme })
-      })
-      addThemeDiv()
+  chrome.storage.sync.set({ theme }, function() {
+    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, { from: 'cotton', type: 'updateTheme', theme })
     })
+    addThemeDiv()
   })
 }
 

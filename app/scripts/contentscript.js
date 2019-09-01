@@ -29,12 +29,31 @@ function getThemeColors(themeName) {
  *                        false: update theme based on previous theme
  */
 function updateTheme(options = {}) {
-  chrome.storage.sync.get(['theme', 'previousTheme'], function(result) {
+  chrome.storage.sync.get(['theme'], function(result) {
     const theme = result ? getThemeColors(result.theme) : themes.github
-    let previousTheme = result ? getThemeColors(result.previousTheme) : themes.github
-    previousTheme = options.default ? themes.github : previousTheme
+    let previousTheme = getPreviousThemeName()
+    previousTheme = options.default ? themes.github : themes[previousTheme]
     applyTheme(theme, previousTheme)
   })
+}
+
+function getPreviousThemeName() {
+  let themeName
+  const previoutTheme = []
+  getLegendContainer()
+    .find('li')
+    .each(function() {
+      const color = rgb2hex($(this).css('background-color'))
+      previoutTheme.push(color)
+    })
+
+  for (const [key, value] of Object.entries(themes)) {
+    if (value.toString() === previoutTheme.toString()) {
+      themeName = key
+      break
+    }
+  }
+  return themeName || 'github'
 }
 
 function applyTheme(theme, previousTheme) {
