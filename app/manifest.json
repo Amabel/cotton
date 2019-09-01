@@ -28,7 +28,7 @@
       "all_frames": false
     }
   ],
-  "browser_action":
+  "page_action":
 	{
     "default_title": "Cotton",
     "default_popup": "popup.html"
