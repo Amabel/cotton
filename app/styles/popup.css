@@ -24,6 +24,10 @@
   padding: 8px 10px;
 }
 
+.container .body .theme .button .icon img {
+  width: 16px;
+}
+
 .container .body .current-theme .square {
   width: 10px;
   height: 10px;
