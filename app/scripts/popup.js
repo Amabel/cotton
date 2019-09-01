@@ -1,8 +1,8 @@
 import $ from 'jquery'
 import * as app from '../manifest.json'
 import * as openColor from 'open-color/open-color.json'
-import { COLORS_INDEX, DEFAULT_THEME } from './constants'
 import { capitalizeFirstLetter } from './utils'
+import * as themes from './theme'
 
 setup()
 addVersionNumber()
@@ -65,29 +65,15 @@ function addThemeDiv() {
 
 function formThemeDiv(callback) {
   chrome.storage.sync.get('theme', function(result) {
-    const theme = result.theme
-    const colorsIndex = COLORS_INDEX
-    const colors = openColor.default[theme]
-    let trimedColors
-
-    if (colors) {
-      trimedColors = [
-        colors[colorsIndex[0]],
-        colors[colorsIndex[1]],
-        colors[colorsIndex[2]],
-        colors[colorsIndex[3]],
-        colors[colorsIndex[4]],
-      ]
-    } else {
-      trimedColors = DEFAULT_THEME
-    }
+    const themeName = result.theme
+    const colors = themes[themeName] ? themes[themeName] : themes.github
 
     let div = ''
-    trimedColors.forEach(function(c) {
+    colors.forEach(function(c) {
       div += `<div class="square" style="background-color: ${c}"></div>`
     })
 
-    callback(div, theme)
+    callback(div, themeName)
   })
 }
 

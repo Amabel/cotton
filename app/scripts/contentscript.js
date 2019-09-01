@@ -1,7 +1,6 @@
 import $ from 'jquery'
-import * as openColor from 'open-color/open-color.json'
 import { rgb2hex } from './utils'
-import { COLORS_INDEX, DEFAULT_THEME } from './constants'
+import * as themes from './theme'
 
 main()
 
@@ -18,23 +17,9 @@ function addMessageListener() {
   })
 }
 
-function getThemeColors(theme) {
-  // Index range: 0 ~ 9
-  // See more on https://yeun.github.io/open-color/
-  const colorsIndex = COLORS_INDEX
-  const colors = openColor.default[theme]
-  if (colors) {
-    // Trim colors based on index
-    return [
-      colors[colorsIndex[0]],
-      colors[colorsIndex[1]],
-      colors[colorsIndex[2]],
-      colors[colorsIndex[3]],
-      colors[colorsIndex[4]],
-    ]
-  }
-
-  return DEFAULT_THEME
+function getThemeColors(themeName) {
+  const theme = themes[themeName]
+  return theme ? theme : themes.github
 }
 
 /**
@@ -45,9 +30,9 @@ function getThemeColors(theme) {
  */
 function updateTheme(options = {}) {
   chrome.storage.sync.get(['theme', 'previousTheme'], function(result) {
-    const theme = result ? getThemeColors(result.theme) : DEFAULT_THEME
-    let previousTheme = result ? getThemeColors(result.previousTheme) : DEFAULT_THEME
-    previousTheme = options.default ? DEFAULT_THEME : previousTheme
+    const theme = result ? getThemeColors(result.theme) : themes.github
+    let previousTheme = result ? getThemeColors(result.previousTheme) : themes.github
+    previousTheme = options.default ? themes.github : previousTheme
     applyTheme(theme, previousTheme)
   })
 }
