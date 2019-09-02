@@ -1,6 +1,5 @@
 import $ from 'jquery'
 import * as app from '../manifest.json'
-import * as openColor from 'open-color/open-color.json'
 import { capitalizeFirstLetter } from './utils'
 import * as themes from './theme'
 
@@ -10,10 +9,7 @@ addThemeDiv()
 
 addActionListeners()
 
-function setup() {
-  delete openColor.default.black
-  delete openColor.default.white
-}
+function setup() {}
 
 function addActionListeners() {
   addRandomizeActionListener()
@@ -33,7 +29,7 @@ function addRandomizeActionListener() {
 }
 
 function resetTheme() {
-  setTheme('default')
+  setTheme('github')
 }
 
 function randomizeTheme() {
@@ -51,21 +47,22 @@ function randomizeTheme() {
 }
 
 function getRandomTheme() {
-  const themes = Object.keys(openColor.default)
-  return themes[(themes.length * Math.random()) << 0]
+  const themeKeys = Object.keys(themes)
+  return themeKeys[(themeKeys.length * Math.random()) << 0]
 }
 
 function addThemeDiv() {
   const cb = function(div, themeName) {
     $('#currentTheme').html(div)
-    $('#themeName').html(capitalizeFirstLetter(themeName))
+    themeName = capitalizeFirstLetter(themeName === 'github' ? 'GitHub' : themeName)
+    $('#themeName').html(themeName)
   }
   formThemeDiv(cb)
 }
 
 function formThemeDiv(callback) {
   chrome.storage.sync.get('theme', function(result) {
-    const themeName = result.theme
+    const themeName = result.theme || 'GitHub'
     const colors = themes[themeName] ? themes[themeName] : themes.github
 
     let div = ''
