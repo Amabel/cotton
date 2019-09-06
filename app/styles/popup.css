@@ -1,0 +1,41 @@
+.container {
+  padding: 24px;
+}
+
+.container .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .header .logo {
+  height: 24px;
+}
+
+.container .body .theme {
+  justify-content: space-between;
+}
+
+.container .body .current-theme {
+  display: flex;
+}
+
+.container .body .theme .button {
+  padding: 8px 10px;
+}
+
+.container .body .theme .button .icon img {
+  width: 16px;
+}
+
+.container .body .current-theme .square {
+  width: 10px;
+  height: 10px;
+  margin-right: 2px;
+}
+
+.container .footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

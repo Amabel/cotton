@@ -1,10 +1,13 @@
 {
   "name": "__MSG_appName__",
   "description": "__MSG_appDescription__",
-  "version": "0.2.0",
+  "version": "0.0.1",
   "manifest_version": 2,
   "default_locale": "en",
-  "icons": {},
+  "icons": {
+    "16": "assets/images/logo-16.png",
+    "128": "assets/images/logo-128.png"
+  },
   "background": {
     "scripts": [
       "scripts/background.js"
@@ -25,7 +28,14 @@
       "all_frames": false
     }
   ],
-  "permissions": [],
+  "page_action":
+	{
+    "default_title": "Cotton",
+    "default_popup": "popup.html"
+	},
+  "permissions": [
+    "storage"
+  ],
   "web_accessible_resources": [],
-  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://code.jquery.com https://cdn.jsdelivr.net; object-src 'self' "
 }

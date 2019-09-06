@@ -1,0 +1,51 @@
+@import 'open-color.css';
+
+/* layout */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row.center {
+  align-items: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-col.center {
+  justify-content: center;
+}
+
+.ml-8 {
+  margin-left: 8px !important;
+}
+
+.pl-12 {
+  padding-left: 12px;
+}
+
+/* size */
+.w-220 {
+  width: 220px;
+}
+
+/* color */
+.color-gray-6 {
+  color: var(--oc-gray-6);
+}
+
+/* font */
+.bold {
+  font-weight: bold;
+}
+
+.fs-12 {
+  font-size: 12px;
+}
+
+.fs-24 {
+  font-size: 24px;
+}
