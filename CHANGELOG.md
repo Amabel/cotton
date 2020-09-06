@@ -1,5 +1,7 @@
 # Changelog
 
-## [vx.x.x] - xxxx-xx-xx
+## [v0.0.2] - 2020-09-06
 
-### Added
+### Fixed
+
+- Apply to the new design of GitHub
