@@ -39,17 +39,17 @@ function updateTheme(options = {}) {
 
 function getPreviousThemeName() {
   let themeName
-  const previoutTheme = []
+  const previousTheme = []
   getLegendContainer()
     .find('li')
     .each(function() {
       const backgroundColor = $(this).css('background-color')
       const color = backgroundColor.startsWith('#') ? backgroundColor : rgb2hex(backgroundColor)
-      previoutTheme.push(color)
+      previousTheme.push(color)
     })
 
   for (const [key, value] of Object.entries(themes)) {
-    if (value.toString() === previoutTheme.toString()) {
+    if (value.toString() === previousTheme.toString()) {
       themeName = key
       break
     }
