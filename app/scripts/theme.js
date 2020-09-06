@@ -1,5 +1,5 @@
 // GitHub default
-export const github = ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
+export const github = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39']
 
 // Open Color
 export const gray = ['#f8f9fa', '#e9ecef', '#adb5bd', '#495057', '#212529']
