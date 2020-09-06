@@ -43,7 +43,8 @@ function getPreviousThemeName() {
   getLegendContainer()
     .find('li')
     .each(function() {
-      const color = rgb2hex($(this).css('background-color'))
+      const backgroundColor = $(this).css('background-color')
+      const color = backgroundColor.startsWith('#') ? backgroundColor : rgb2hex(backgroundColor)
       previoutTheme.push(color)
     })
 
